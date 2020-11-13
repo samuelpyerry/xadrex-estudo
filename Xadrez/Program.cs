@@ -12,7 +12,10 @@ namespace Xadrez
             Console.WriteLine(posicao);
 
             //Testando a class Tabuleiro
-            Tabuleiro tab = new Tabuleiro(5, 5);
+            Tabuleiro tab = new Tabuleiro(8, 8);
+
+            //Testando a impressão do Tabuleiro
+            Tela.ImprimirTabuleiro(tab);
         }
     }
 }

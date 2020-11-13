@@ -10,6 +10,9 @@ namespace Xadrez
             //Testando class Posição
             Posicao posicao = new Posicao(4,5);
             Console.WriteLine(posicao);
+
+            //Testando a class Tabuleiro
+            Tabuleiro tab = new Tabuleiro(5, 5);
         }
     }
 }

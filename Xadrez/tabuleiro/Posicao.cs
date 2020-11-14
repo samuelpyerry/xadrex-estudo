@@ -11,7 +11,7 @@ namespace Xadrez.tabuleiro
         public int Coluna { get; set; }
         public int Linha { get; set; }
 
-        public Posicao(int coluna, int linha)
+        public Posicao(int linha, int coluna)
         {
             Coluna = coluna;
             Linha = linha;

@@ -2,6 +2,7 @@
 using Xadrez.tabuleiro;
 using Xadrez.xadrex_jogo;
 using Xadrez.tabuleiro.enuns;
+using Xadrez.tabuleiro.Exeptions;
 
 namespace Xadrez
 {
@@ -17,12 +18,18 @@ namespace Xadrez
             Tabuleiro tab = new Tabuleiro(8, 8);
 
             //Testando metodo para posicionar peças
-            tab.ColocarPeca(new Torre(Cor.amarelo, tab), new Posicao(0, 0));
-            tab.ColocarPeca(new Torre(Cor.amarelo, tab), new Posicao(1, 3));
-            tab.ColocarPeca(new Rei(Cor.vermelho, tab), new Posicao(2, 4));
+            try
+            {
+                tab.ColocarPeca(new Torre(Cor.amarelo, tab), new Posicao(0, 0));
+                tab.ColocarPeca(new Torre(Cor.amarelo, tab), new Posicao(1, 3));
+                tab.ColocarPeca(new Rei(Cor.vermelho, tab), new Posicao(3, 5));
 
-            //Testando a impressão do Tabuleiro
-            Tela.ImprimirTabuleiro(tab);
+                //Testando a impressão do Tabuleiro
+                Tela.ImprimirTabuleiro(tab);
+            }catch (DomainExeptions execao)
+            {
+                Console.WriteLine("Erro: " + execao.Message);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xadrez.tabuleiro.Exeptions;
 
 namespace Xadrez.tabuleiro
 {
@@ -23,10 +24,43 @@ namespace Xadrez.tabuleiro
             return pecas[linha, coluna];
         }
 
+        public Peca Peca(Posicao posicao)
+        {
+            return pecas[posicao.Linha, posicao.Coluna];
+        }
+
         public void ColocarPeca(Peca peca, Posicao p)
         {
+            if (ExistePeca(p))
+            {
+                throw new DomainExeptions("Já existe uma peça nessa posição.");
+            }
+            
             pecas[p.Linha, p.Coluna] = peca;
             peca.Posicao = p;
+        }
+
+        public bool ExistePeca (Posicao posicao)
+        {
+
+            ValidarPosicao(posicao);
+            return Peca(posicao) != null;      
+           
+        }
+        public bool TratarPosicao(Posicao posicao)
+        {
+            if (posicao.Linha < 0 || posicao.Linha >= Linhas || posicao.Coluna < 0 || posicao.Coluna >= Colunas)
+            {
+                return false;
+            }
+            return true;
+        }
+        public void ValidarPosicao(Posicao posicao)
+        {
+            if (!TratarPosicao(posicao))
+            {
+                throw new DomainExeptions("Não existe essa posição no tabuleiro.");
+            }
         }
     }
 }

@@ -6,10 +6,10 @@ namespace Xadrez.tabuleiro.enuns
 {
     enum Cor
     {
-        preto,
-        branco, 
-        amarelo,
-        vermelho,
-        verde
+        Preto,
+        Branco, 
+        Amarelo,
+        Vermelho,
+        Verde
     }
 }

@@ -16,9 +16,12 @@ namespace Xadrez
 
             //Testando a class Tabuleiro
             Tabuleiro tab = new Tabuleiro(8, 8);
+            PosicaoXadrez posicaoXadrez = new PosicaoXadrez('c', 7);
+            Console.WriteLine(posicaoXadrez.ToPosicao());
+            Console.WriteLine(posicaoXadrez);
 
             //Testando metodo para posicionar peças
-            try
+            /*try
             {
                 tab.ColocarPeca(new Torre(Cor.amarelo, tab), new Posicao(0, 0));
                 tab.ColocarPeca(new Torre(Cor.amarelo, tab), new Posicao(1, 3));
@@ -29,7 +32,7 @@ namespace Xadrez
             }catch (DomainExeptions execao)
             {
                 Console.WriteLine("Erro: " + execao.Message);
-            }
+            }*/
         }
     }
 }

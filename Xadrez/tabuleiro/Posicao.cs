@@ -19,9 +19,9 @@ namespace Xadrez.tabuleiro
 
         public override string ToString()
         {
-            return Coluna +
+            return Linha +
                 ", "
-                + Linha;
+                + Coluna;
         }
     }
 }

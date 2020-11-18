@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xadrez.tabuleiro;
 using Xadrez.tabuleiro.enuns;
+using Xadrez.xadrex_jogo;
 
 namespace Xadrez
 {
@@ -50,6 +51,15 @@ namespace Xadrez
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
+        }
+
+        public static PosicaoXadrez CapturarLetra()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            //Uso de "" para converter totalmente em string Tip.: Obs
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
         }
     }
 }

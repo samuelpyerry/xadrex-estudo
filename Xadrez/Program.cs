@@ -4,6 +4,7 @@ using Xadrez.xadrex_jogo;
 using Xadrez.tabuleiro.enuns;
 using Xadrez.tabuleiro.Exeptions;
 
+
 namespace Xadrez
 {
     class Program
@@ -14,8 +15,7 @@ namespace Xadrez
             //Posicao posicao = new Posicao(4,5);
             //Console.WriteLine(posicao);
 
-            //Testando a class Tabuleiro
-            Tabuleiro tab = new Tabuleiro(8, 8);
+           
             
             /*
             * Testando a class PosicaoXadrez
@@ -28,13 +28,28 @@ namespace Xadrez
             //Testando metodo para posicionar peças
             try
             {
-                tab.ColocarPeca(new Torre(Cor.Branco, tab), new Posicao(0, 0));
-                tab.ColocarPeca(new Torre(Cor.Branco, tab), new Posicao(1, 3));
-                tab.ColocarPeca(new Rei(Cor.Preto, tab), new Posicao(3, 5));
+                //Testando a class Tabuleiro
+                Partida partida = new Partida();
+                
 
-                //Testando a impressão do Tabuleiro
-                Tela.ImprimirTabuleiro(tab);
-            }catch (DomainExeptions execao)
+                while (!partida.Final)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.Tab);
+
+                    Console.WriteLine();
+                    Console.Write(" Origem: ");
+                    Posicao origem = Tela.CapturarLetra().ToPosicao();
+                    Console.Write(" Destino: ");
+                    Posicao destino = Tela.CapturarLetra().ToPosicao();
+
+                    partida.ExecutarMovimento(origem, destino);
+
+
+                }
+
+            }
+            catch (DomainExeptions execao)
             {
                 Console.WriteLine("Erro: " + execao.Message);
             }

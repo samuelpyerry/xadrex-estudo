@@ -20,6 +20,11 @@ namespace Xadrez.tabuleiro
             Tab = tab;
         }
 
+        public void QtdMovimento()
+        {
+            QtdMov++;
+        }
+
 
     }
 }

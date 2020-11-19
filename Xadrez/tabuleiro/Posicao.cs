@@ -17,6 +17,12 @@ namespace Xadrez.tabuleiro
             Linha = linha;
         }
 
+        public void DefinirValores(int linha, int coluna)
+        {
+            Coluna = coluna;
+            Linha = linha;
+        }
+
         public override string ToString()
         {
             return Linha +

@@ -214,7 +214,7 @@ namespace Xadrez.xadrex_jogo
 
         public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
         {
-            if (!Tab.Peca(origem).PodeMoverPara(destino))
+            if (!Tab.Peca(origem).MovimentoPossivel(destino))
             {
                 throw new DomainExeptions("Não é possivel mover a peça para esse destino.");
             }

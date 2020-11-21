@@ -208,7 +208,7 @@ namespace Xadrez.xadrex_jogo
             }
             if (!Tab.Peca(posicao).ExisteMovimentosPossiveis())
             {
-                throw new DomainExeptions("Não existe movimentos possíveis.");
+                throw new DomainExeptions("Não há movimentos possíveis para a peça de origem escolhida!");
             }
         }
 

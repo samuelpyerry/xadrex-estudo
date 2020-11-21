@@ -32,12 +32,12 @@ namespace Xadrez.tabuleiro
 
         public bool ExisteMovimentosPossiveis()
         {
-            bool[,] matriz = MovimentosPossiveis();
-            for(int i = 1; i <= Tab.Linhas; i++)
+            bool[,] mat = MovimentosPossiveis();
+            for(int i = 0; i < Tab.Linhas; i++)
             {
-                for(int j = 1; j <= Tab.Colunas; j++)
+                for(int j = 0; j < Tab.Colunas; j++)
                 {
-                    if (matriz[i, j])
+                    if (mat[i, j])
                     {
                         return true;
                     }

@@ -29,14 +29,35 @@ namespace Xadrez.xadrex_jogo
 
         public Peca ExecutarMovimento(Posicao origem, Posicao destino)
         {
-            Peca peca = Tab.RetirarPeca(origem);
+            Peca p = Tab.RetirarPeca(origem);
             peca.QtdMovimento();
             Peca pecaCapturada = Tab.RetirarPeca(destino);
-            Tab.ColocarPeca(peca, destino);
+            Tab.ColocarPeca(p, destino);
             if (pecaCapturada != null)
             {
                 Capturadas.Add(pecaCapturada);
             }
+
+            //# Jogada especial roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(destino.Linha, destino.Coluna + 1);
+                Peca t = Tab.RetirarPeca(origemT);
+                t.QtdMovimento();
+                Tab.ColocarPeca(t, destinoT);
+            }
+
+            //# Jogada especial roque grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(destino.Linha, destino.Coluna - 1);
+                Peca t = Tab.RetirarPeca(origemT);
+                t.QtdMovimento();
+                Tab.ColocarPeca(t, destinoT);
+            }
+
             return pecaCapturada;
         }
 
@@ -119,6 +140,27 @@ namespace Xadrez.xadrex_jogo
             }
 
             Tab.ColocarPeca(p, origem);
+
+            //# Jogada especial roque pequeno
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoT = new Posicao(destino.Linha, destino.Coluna + 1);
+                Peca t = Tab.RetirarPeca(destinoT);
+                t.QtdMovimentoDiminuir();
+                Tab.ColocarPeca(t, origemT);
+            }
+
+            //# Jogada especial roque grande
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemT = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoT = new Posicao(destino.Linha, destino.Coluna - 1);
+                Peca t = Tab.RetirarPeca(destinoT);
+                t.QtdMovimento();
+                Tab.ColocarPeca(t, origemT);
+            }
+
 
         }
 
@@ -233,7 +275,7 @@ namespace Xadrez.xadrex_jogo
             ColocarNovaPeca('d', 2, new Torre(Cor.Branco, Tab));
             ColocarNovaPeca('e', 2, new Torre(Cor.Branco, Tab));
             ColocarNovaPeca('e', 1, new Torre(Cor.Branco, Tab));
-            ColocarNovaPeca('d', 1, new Rei(Cor.Branco, Tab));
+            ColocarNovaPeca('d', 1, new Rei(Cor.Branco, Tab, this));
 
 
             ColocarNovaPeca('c', 7, new Torre(Cor.Preto, Tab));
@@ -241,7 +283,7 @@ namespace Xadrez.xadrex_jogo
             ColocarNovaPeca('d', 7, new Torre(Cor.Preto, Tab));
             ColocarNovaPeca('e', 7, new Torre(Cor.Preto, Tab));
             ColocarNovaPeca('e', 8, new Torre(Cor.Preto, Tab));
-            ColocarNovaPeca('d', 8, new Rei(Cor.Preto, Tab));
+            ColocarNovaPeca('d', 8, new Rei(Cor.Preto, Tab, this));
             
 
         }

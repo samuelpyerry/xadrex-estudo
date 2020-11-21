@@ -9,6 +9,42 @@ namespace Xadrez
 {
     class Tela
     {
+
+        public static void imprimirPartida(Partida partida)
+        {
+            ImprimirTabuleiro(partida.Tab);
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.WriteLine("Turno: " + partida.Turno);
+            Console.WriteLine("Aguardando jogador: " + partida.JogadorAtual);
+        }
+
+        public static void ImprimirPecasCapturadas(Partida partida)
+        {
+            Console.WriteLine("Peças capturadas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branco));
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Pretas: ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preto));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+            foreach(Peca x in conjunto)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+
+        }
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for (int i = 0; i < tab.Linhas; i++)
@@ -17,10 +53,10 @@ namespace Xadrez
 
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-                    
-                    
+
+
                     ImprimirPeca(tab.PecaTab(i, j));
-                       
+
 
                 }
                 Console.WriteLine();
@@ -32,13 +68,13 @@ namespace Xadrez
 
         //Mesmo metodo de cima, POREM, com um novo parametro "posicoesPossiveis"
 
-        public static void ImprimirTabuleiro(Tabuleiro tab, bool [,] possicoesPossiveis)
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] possicoesPossiveis)
         {
             //Cores do background
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
 
-            
+
 
             for (int i = 0; i < tab.Linhas; i++)
             {

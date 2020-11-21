@@ -15,8 +15,8 @@ namespace Xadrez
             //Posicao posicao = new Posicao(4,5);
             //Console.WriteLine(posicao);
 
-           
-            
+
+
             /*
             * Testando a class PosicaoXadrez
             PosicaoXadrez posicaoXadrez = new PosicaoXadrez('c', 7);
@@ -30,30 +30,46 @@ namespace Xadrez
             {
                 //Testando a class Tabuleiro
                 Partida partida = new Partida();
-                
+
 
                 while (!partida.Final)
                 {
-                    Console.Clear();
-                    Tela.ImprimirTabuleiro(partida.Tab);
 
-                    Console.WriteLine();
-                    Console.Write(" Origem: ");
-                    Posicao origem = Tela.CapturarLetra().ToPosicao();
-
-                    bool[,] posicoesPosiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
+                    try
+                    {
 
 
-                    //Marcar os caminhos livres
-                    Console.Clear();
-                    Tela.ImprimirTabuleiro(partida.Tab, posicoesPosiveis);
+                        Console.Clear();
+                        Tela.ImprimirTabuleiro(partida.Tab);
+
+                        Console.WriteLine("Turno: " + partida.Turno);
+                        Console.WriteLine("Aguardando jogador " + partida.JogadorAtual);
+
+                        Console.WriteLine();
+                        Console.Write("Origem: ");
+                        Posicao origem = Tela.CapturarLetra().ToPosicao();
+                        partida.ValidarPosicaoOrigem(origem);
+                        bool[,] posicoesPosiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
 
 
-                    Console.Write(" Destino: ");
-                    Posicao destino = Tela.CapturarLetra().ToPosicao();
+                        //Marcar os caminhos livres
+                        Console.Clear();
+                        Tela.ImprimirTabuleiro(partida.Tab, posicoesPosiveis);
 
-                    partida.ExecutarMovimento(origem, destino);
+                        Console.WriteLine();
+                        Console.Write("Destino: ");
+                        Posicao destino = Tela.CapturarLetra().ToPosicao();
+                        partida.ValidarPosicaoDestino(origem, destino);
 
+
+                        partida.AlterarMovimentosTurno(origem, destino);
+                    }
+                    catch(DomainExeptions erros)
+                    {
+                        Console.WriteLine(erros.Message);
+                        Console.Write("Digite qualquer tecla para tentar novamente.");
+                        Console.ReadLine();
+                    }
 
                 }
 

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using Xadrez.tabuleiro;
 using Xadrez.tabuleiro.enuns;
+using Xadrez.tabuleiro.Exeptions;
 
 namespace Xadrez.xadrex_jogo
 {
     class Partida
     {
         public Tabuleiro Tab;
-        private int Turno;
-        private Cor JogadorAtual;
+        public int Turno { get; private set; }
+        public Cor JogadorAtual { get; private set; }
         public bool Final { get; private set; }
 
         public Partida()
@@ -21,7 +22,7 @@ namespace Xadrez.xadrex_jogo
             ColocarPecas();
             Final = false;
         }
-        
+
         public void ExecutarMovimento(Posicao origem, Posicao destino)
         {
             Peca peca = Tab.RetirarPeca(origem);
@@ -30,6 +31,50 @@ namespace Xadrez.xadrex_jogo
             Tab.ColocarPeca(peca, destino);
 
         }
+
+        public void AlterarMovimentosTurno(Posicao origem, Posicao destino)
+        {
+            ExecutarMovimento(origem, destino);
+            VezJogador();
+            Turno++;
+        }
+
+        public void VezJogador()
+        {
+            if (JogadorAtual == Cor.Branco)
+            {
+                JogadorAtual = Cor.Preto;
+            }
+            else
+            {
+                JogadorAtual = Cor.Branco;
+            }
+        }
+
+        public void ValidarPosicaoOrigem(Posicao posicao)
+        {
+            if (Tab.Peca(posicao) == null)
+            {
+                throw new DomainExeptions("Não existe peça nessa cordenada.");
+            }
+            if (JogadorAtual != Tab.Peca(posicao).Cor)
+            {
+                throw new DomainExeptions("A peça selecionada não é sua.");
+            }
+            if (!Tab.Peca(posicao).ExisteMovimentosPossiveis())
+            {
+                throw new DomainExeptions("Não existe movimentos possíveis.");
+            }
+        }
+
+        public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!Tab.Peca(origem).PodeMoverPara(destino))
+            {
+                throw new DomainExeptions("Não é possivel mover a peça para esse destino.");
+            }
+        }
+
         private void ColocarPecas()
         {
             Tab.ColocarPeca(new Torre(Cor.Branco, Tab), new PosicaoXadrez('c', 1).ToPosicao());

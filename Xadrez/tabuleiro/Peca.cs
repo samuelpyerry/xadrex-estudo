@@ -25,6 +25,11 @@ namespace Xadrez.tabuleiro
             QtdMov++;
         }
 
+        public void QtdMovimentoDiminuir()
+        {
+            QtdMov--;
+        }
+
         public bool ExisteMovimentosPossiveis()
         {
             bool[,] matriz = MovimentosPossiveis();

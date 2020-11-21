@@ -40,6 +40,15 @@ namespace Xadrez
                     Console.WriteLine();
                     Console.Write(" Origem: ");
                     Posicao origem = Tela.CapturarLetra().ToPosicao();
+
+                    bool[,] posicoesPosiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
+
+
+                    //Marcar os caminhos livres
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.Tab, posicoesPosiveis);
+
+
                     Console.Write(" Destino: ");
                     Posicao destino = Tela.CapturarLetra().ToPosicao();
 
